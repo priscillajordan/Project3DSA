@@ -3,13 +3,13 @@
 // Constructor
 MinHeap::MinHeap() {
 
-    heap = new Place[20000];
+    heap = new VacationData[20000];
     numElements = 0;
 
 }
 
 // insert element into min heap
-void MinHeap::Insert(Place k) {
+void MinHeap::Insert(VacationData k) {
 
     CalculateDifference(k);
     int i = numElements;
@@ -24,7 +24,7 @@ void MinHeap::Insert(Place k) {
 
 }
 
-void MinHeap::Swap(Place parent, Place child, int index) {
+void MinHeap::Swap(VacationData parent, VacationData child, int index) {
 
     heap[(index - 1) / 2] = child;
     heap[index] = parent;
@@ -32,28 +32,39 @@ void MinHeap::Swap(Place parent, Place child, int index) {
 }
 
 // calculate the differences between the users budget and the element inserted
-void MinHeap::CalculateDifference(Place& element) {
+void MinHeap::CalculateDifference(VacationData& element) {
 
-    if (element.cost > _budget) {
-
-        element.difference = element.cost - _budget;
-
-    } else {
-
-        element.difference = _budget - element.cost;
-
+    if (element.month != d.month) {
+        element.difference += 1;
     }
+
+    element.difference += abs(d.duration - element.duration);
+    element.difference += abs(d.age - element.age);
+
+    if (element.gender != d.gender) {
+        element.difference += 1;
+    }
+    if (element.accommodation != d.accommodation) {
+        element.difference += 1;
+    }
+
+    element.difference += abs(d.budget - element.budget);
 
 }
 
-void MinHeap::SetBudget(double budget) {
+void MinHeap::SetParameters(string _month, int _duration, int _age, string _gender, string _accomodation, double _budget) {
 
-    _budget = budget;
+    d.month = _month;
+    d.duration = _duration;
+    d.age = _age;
+    d.gender = _gender;
+    d.accommodation = _accomodation;
+    d.budget = _budget;
 
 }
 
 // returns the root
-Place MinHeap::Peek() {
+VacationData MinHeap::Peek() {
 
     return heap[0];
 }

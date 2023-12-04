@@ -7,13 +7,12 @@ using namespace std;
 int main() {
 
     MinHeap destinations;
-    destinations.SetBudget(7809);
+    destinations.SetParameters("April", 12, 25, "Male", "Airbnb", 35676.51);
     string travelData = "/Users/christiancooper/Desktop/Project3MinHeap/travel_data.csv";
     ifstream file(travelData);
 
     string header;
     getline(file, header);
-    cout << header << endl;
 
     string data;
     while(getline(file, data)) {
@@ -44,8 +43,8 @@ int main() {
 
     }
 
-    cout << "Destination: " << destinations.Peek().destination << endl;
-    cout << "Cost: " << destinations.Peek().cost << endl;
+    cout << "Destination: " << destinations.Peek().city << endl;
+    cout << "Cost: " << destinations.Peek().budget << endl;
 
     return 0;
 }

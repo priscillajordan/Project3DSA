@@ -1,31 +1,20 @@
 #include <iostream>
+#include "VacationStruct.h"
 using namespace std;
-
-// Destination values
-struct Place {
-    string destination;
-    string month;
-    int duration;
-    int age;
-    string gender;
-    string accomodation;
-    double cost;
-
-    double difference;
-};
 
 class MinHeap {
 
 private:
-    Place *heap; // MinHeap Array
+    VacationData *heap; // MinHeap Array
+    VacationData d;
     int numElements;
-    double _budget;
+
 
 public:
     MinHeap();
-    void Insert(Place k);
-    void Swap(Place parent, Place child, int index);
-    void CalculateDifference(Place& elements);
-    void SetBudget(double budget);
-    Place Peek();
+    void Insert(VacationData k);
+    void Swap(VacationData parent, VacationData child, int index);
+    void CalculateDifference(VacationData& elements);
+    void SetParameters(string _month, int _duration, int _age, string _gender, string _accomodation, double _budget);
+    VacationData Peek();
 };
