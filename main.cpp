@@ -13,11 +13,11 @@
 using namespace std; 
 
 //return the struct with the lowest difference between user values and its entries
-vector<VacationData> recommendPlace(HashMap hashmap, VacationData userData) 
+VacationData recommendPlace(HashMap hashmap, VacationData userData) 
 {
     double minDifference = 1000000; //random placeholder value to start with a really large number 
 
-    std::vector<std::pair<VacationData, double>> topMatches;
+    VacationData structToRecommend;
 
     for (int i = 0; i < HashMap::capacity; i++) 
     {
@@ -46,29 +46,16 @@ vector<VacationData> recommendPlace(HashMap hashmap, VacationData userData)
                     difference += 1; 
                 }
 
-                topMatches.push_back({it, difference});
-
+                if(difference < minDifference) {
+                    minDifference = difference; 
+                    structToRecommend = it; 
+                }
             }
         }
     }
 
-    // Sort the vector based on the difference in ascending order using a lambda function
-    std::sort(topMatches.begin(), topMatches.end(), [](const auto& a, const auto& b) {
-        return a.second < b.second;
-    });
 
-    // Extract the top 'numRecommendations' matches
-    std::vector<VacationData> result;
-    for (const auto& pair : topMatches) {
-        result.push_back(pair.first);
-    }
-
-    // Take the top 'numRecommendations' matches
-    if (result.size() > 5) {
-        result.resize(5);
-    }
-
-    return result;
+    return structToRecommend;
 }
     
 
@@ -149,12 +136,12 @@ int main()
 
     HashMap hashmap = populateHashMap(data);
 
-    vector<VacationData> recommendation = recommendPlace(hashmap, userInput); 
+    VacationData recommendation = recommendPlace(hashmap, userInput); 
 
-    for(int i = 0; i < 5; i++) {
-        cout << "Recommended vacation city: " << recommendation[i].city << endl;
-        cout << "Info: " << recommendation[i].month << recommendation[i].age << recommendation[i].gender << recommendation[i].budget << endl; 
-    }
+    //for(int i = 0; i < 5; i++) {
+        cout << "Recommended vacation city: " << recommendation.city << endl;
+        cout << "Info: " << recommendation.month << recommendation.age << recommendation.gender << recommendation.budget << endl; 
+    //}
     
 
     return 0;
