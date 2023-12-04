@@ -2,9 +2,9 @@
 #include <string>
 #pragma once
 
-
 using namespace std; 
 
+//defines variables for each row in the csv dataset 
 struct VacationData
 {
     string city; 
@@ -14,4 +14,5 @@ struct VacationData
     string gender;
     string accommodation;
     double budget;
+    double difference; 
 };
